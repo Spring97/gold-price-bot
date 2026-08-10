@@ -1,0 +1,20 @@
+[Unit]
+Description=Gold Price Push Bot - 企业微信黄金价格推送机器人
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# 部署后请将下面的路径改为你实际的部署路径
+WorkingDirectory=/opt/gold_price_bot
+ExecStart=/usr/bin/python3 /opt/gold_price_bot/main.py --daemon
+Restart=always
+RestartSec=10
+StandardOutput=append:/opt/gold_price_bot/logs/daemon.log
+StandardError=append:/opt/gold_price_bot/logs/daemon.err.log
+
+# 时区设置
+Environment=TZ=Asia/Shanghai
+
+[Install]
+WantedBy=multi-user.target
